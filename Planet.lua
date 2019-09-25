@@ -94,7 +94,7 @@ end
    
 
   
-  function Planet_Destroy()
+function Planet_Destroy()
   -- Clean up
   DeleteEntities(Planet_Models)
   Planet_Models = {}
@@ -104,7 +104,7 @@ end
   Planet_Distance = {}
   Planet_PrePos = {}
   
-  end
+end
 
 function Planet_DeleteEntities(entityList)
   for id, entity in pairs(entityList) do
@@ -118,8 +118,14 @@ function Planet_Update(dt)
 
 
   PrintPOS(Sun)
-  PrintPOS()
-  
+  PrintPOS(Mercury)
+  PrintPOS(Venus)
+  PrintPOS(Earth)
+  PrintPOS(Mars)
+  PrintPOS(Jupiter)
+  PrintPOS(saturn)
+  PrintPOS(neptune)
+  PrintPOS(Uranus)
   
   
 end
