@@ -122,9 +122,9 @@ end
 
 function PrintPOS(model)
   
-  posi = model:GetPos()
-  currentpos = {posi[1] + }
-  WriteToText(model["name"] .. " X => " ..posi[1] .. " Y => ".. posi[2] .. " Z => " .. posi[3])     
+ -- posi = model:GetPos()
+ -- currentpos = {posi[1] + }
+ -- WriteToText(model["name"] .. " X => " ..posi[1] .. " Y => ".. posi[2] .. " Z => " .. posi[3])     
   
 end
 --[[
