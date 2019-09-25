@@ -1,0 +1,1 @@
+EntityHooks_AddEntity("Sun.FBX", Planet_Init, Planet_Update, Planet_Destroy, true, "Loading Example.\nPlease wait.")
