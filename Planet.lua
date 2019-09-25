@@ -150,7 +150,13 @@ function MoveinCircle(mod , Example_Timer)
   local raptor  = mod
      -- Calculate the current position on the circle. This function can
   -- be found in Math.lua for further details
-  local circle = MathCircle({0,0,0}, 1.4, 2, Example_Timer)
+  
+      local Pos = raptor:GetPos()
+      local distance = (Pos[1]*Pos[1]) + (Pos[2]*Pos[2]) + (Pos[3]*Pos[3])
+      distance = math.sqrt(distance)
+  
+   -- function MathCircle(circleCenter, circleTime, circleRadius, t)
+  local circle = MathCircle({0,0,0}, 1.4, distance , Example_Timer)
   -- Store the current direction the raptor is facing
   local curDir = raptor:GetDir()
   -- Updates the position of the raptor

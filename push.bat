@@ -1,4 +1,3 @@
 git add .
-git commit "Error on 126 line resolved"
-git add .
+git commit -m "Make Circle Movement"
 git push origin master
