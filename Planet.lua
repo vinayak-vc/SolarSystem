@@ -42,10 +42,10 @@ function Planet_Init(entityName, id, pos, scale)
   -- Load models
   for modelIndex, model in ipairs(Planet_ModelList) do
       Planet_Models[model[1]] = Scene.AddEntity(Military_InitialModelPath .. model[2], model[3], model[4], model[5])
-     -- Planet_Models[model[1]]:Lock()
+      Planet_Models[model[1]]:Lock()
       Planet_Models[model[1]]["OriginalPos"] = Planet_Models[model[1]]:GetPos()
       Planet_Models[model[1]]["OriginalScale"] = Planet_Models[model[1]]:GetScale()
-    --  Planet_Models[model[1]]:SetRevolving(true)
+      Planet_Models[model[1]]:SetRevolving(true)
     
       local labelText = Planet_Models[model[1]]["name"]
       local labelDescription = Planet_Models[model[1]]["name"]
@@ -73,23 +73,11 @@ function Planet_Init(entityName, id, pos, scale)
         end 
       
       count = count + 1
-    
+      
     
   end
    
    Planet_Timer = 0
-   
-    for modelIndex, model in ipairs(Planet_Models) do
-      local Pos = model:GetPos()
-      local distance = (Pos[1]*Pos[1]) + (Pos[2]*Pos[2]) + (Pos[3]*Pos[3])
-      distance = math.sqrt(distance)
-      Planet_Distance[modelIndex] = distance
-      Planet_PrePos[modelIndex] = Pos
-      WriteToText( model["name"] .. " " .. distance .. Pos[1] .. Pos[2] .. Pos[3])
-      
-    end
-    
-
 end
    
 
@@ -116,25 +104,29 @@ function Planet_Update(dt)
   -- Increment the timer
   Planet_Timer = Planet_Timer + dt
 
-
-  PrintPOS(Sun)
-  PrintPOS(Mercury)
-  PrintPOS(Venus)
-  PrintPOS(Earth)
-  PrintPOS(Mars)
-  PrintPOS(Jupiter)
-  PrintPOS(saturn)
-  PrintPOS(neptune)
-  PrintPOS(Uranus)
+  MoveinCircle(Sun,Planet_Timer)
+  MoveinCircle(Mercury,Planet_Timer)
+  MoveinCircle(Venus,Planet_Timer)
+  MoveinCircle(Earth,Planet_Timer)
+  MoveinCircle(Mars,Planet_Timer)
+  MoveinCircle(Jupiter,Planet_Timer)
+  MoveinCircle(saturn,Planet_Timer)
+  MoveinCircle(neptune,Planet_Timer)
+  MoveinCircle(Uranus,Planet_Timer)
+  
+ -- X := originX + cos(angle)*radius;
+ -- Y := originY + sin(angle)*radius;
   
   
 end
+
 function PrintPOS(model)
   
   posi = model:GetPos()
+  currentpos = {posi[1] + }
   WriteToText(model["name"] .. " X => " ..posi[1] .. " Y => ".. posi[2] .. " Z => " .. posi[3])     
   
-  end
+end
 --[[
 Sun = nil
 Mercury = nil
@@ -154,5 +146,16 @@ function WriteToText(content)
     file:write("\n" .. content)
 end
 
-
---WriteToText("Hi Twre")
+function MoveinCircle(mod , Example_Timer)
+  local raptor  = mod
+     -- Calculate the current position on the circle. This function can
+  -- be found in Math.lua for further details
+  local circle = MathCircle({0,0,0}, 1.4, 2, Example_Timer)
+  -- Store the current direction the raptor is facing
+  local curDir = raptor:GetDir()
+  -- Updates the position of the raptor
+  raptor:SetPos(circle[1])
+  -- Sets the yaw component of the models direction
+  curDir[1] = circle[2]
+  raptor:SetDir(curDir)
+end
